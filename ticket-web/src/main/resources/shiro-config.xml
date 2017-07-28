@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+
+    <!-- -->
+    <bean id="customRealm" class="com.tqmall.ticket.biz.authorization.shiro.CustomRealm" />
+
+    <!-- 会话ID生成器 -->
+    <bean id="sessionIdGenerator"
+          class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
+    <!-- 会话DAO -->
+    <bean id="shiroSessionDao"
+          class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
+        <property name="sessionIdGenerator" ref="sessionIdGenerator"/>
+    </bean>
+    <!-- 会话Cookie模板 -->
+    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg value="sid"/>
+        <property name="httpOnly" value="true"/>
+        <!--<property name="maxAge" value="-1"/>-->
+        <property name="maxAge" value="2592000"/>
+    </bean>
+    <!-- 会话管理器 -->
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <!-- 超时时间 -->
+        <property name="globalSessionTimeout" value="2592000000"/>
+        <!-- 定时检查失效的session -->
+        <property name="sessionValidationSchedulerEnabled" value="true"/>
+        <property name="deleteInvalidSessions" value="true"/>
+        <property name="sessionIdCookieEnabled" value="true"/>
+        <property name="sessionIdCookie" ref="sessionIdCookie"/>
+        <property name="sessionDAO" ref="shiroSessionDao"/>
+    </bean>
+
+    <!-- 安全管理器 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="customRealm" />
+        <!--<property name="realms">-->
+        <!--<list><ref bean="customRealm"/></list>-->
+        <!--</property>-->
+        <property name="sessionManager" ref="sessionManager" />
+        <!-- 缓存管理器 -->
+        <property name="cacheManager" ref="shiroCacheManager" />
+     </bean>
+     <bean id="shiroCacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
+
+
+     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+         <property name="securityManager" ref="securityManager" />
+         <property name="loginUrl" value="/authorization/main" />
+         <property name="successUrl" value="/authorization/main" />
+         <property name="unauthorizedUrl" value="/authorization/unauthorized" />
+         <property name="filterChainDefinitions">
+             <value>
+                 <!-- 排除 静态前端资源 -->
+                /static/** = anon
+                /html/rescue/** = anon
+                /resources/** = anon
+                /rescue/shop/** = anon
+                /favicon.ico = anon
+                /authorization/sendVerify = anon
+                /authorization/login = anon
+                /authorization/do/login = anon
+                /authorization/logout = anon
+                /page/unauthorized = anon
+                /authorization/session = anon
+
+                 <!-- 主页不控制权限 -->
+                <!-- spring-mvc中配置了主页，并且输入localhost:8084时自动跳转到主页，不进行权限控制 -->
+
+                 <!-- 其余都进行权限控制  /** = user-->
+                 /order/** = user
+                 /user/** = user
+                 <!-- 用户登录后所有操作皆可进行，没必要进行权限控制。只需要进行登录认证就可以了 -->
+                 /** = anon
+</value>
+</property>
+</bean>
+
+<!-- Shiro生命周期处理器 -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+
+</beans>

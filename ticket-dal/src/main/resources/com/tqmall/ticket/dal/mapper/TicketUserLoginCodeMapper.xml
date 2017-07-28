@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tqmall.ticket.dal.mapper.TicketUserLoginCodeMapper" >
+  <resultMap id="BaseResultMap" type="com.tqmall.ticket.dal.entity.TicketUserLoginCode" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="is_deleted" property="isDeleted" jdbcType="CHAR" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="creator" property="creator" jdbcType="INTEGER" />
+    <result column="modifier" property="modifier" jdbcType="INTEGER" />
+    <result column="user_mobile" property="userMobile" jdbcType="BIGINT" />
+    <result column="verify_code" property="verifyCode" jdbcType="INTEGER" />
+    <result column="verify_status" property="verifyStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, is_deleted, gmt_create, gmt_modified, creator, modifier, user_mobile,
+    verify_code, verify_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ticket_user_login_code
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ticket_user_login_code
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tqmall.ticket.dal.entity.TicketUserLoginCode" >
+    insert into ticket_user_login_code (id, is_deleted, gmt_create, 
+      gmt_modified, creator, modifier, 
+      user_mobile, verify_code,
+      verify_status)
+    values (#{id,jdbcType=INTEGER}, #{isDeleted,jdbcType=CHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModified,jdbcType=TIMESTAMP}, #{creator,jdbcType=INTEGER}, #{modifier,jdbcType=INTEGER}, 
+      #{userMobile,jdbcType=BIGINT}, #{verifyCode,jdbcType=INTEGER},
+      #{verifyStatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tqmall.ticket.dal.entity.TicketUserLoginCode" >
+    insert into ticket_user_login_code
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="modifier != null" >
+        modifier,
+      </if>
+
+      <if test="userMobile != null" >
+        user_mobile,
+      </if>
+      <if test="verifyCode != null" >
+        verify_code,
+      </if>
+      <if test="verifyStatus != null" >
+        verify_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="modifier != null" >
+        #{modifier,jdbcType=INTEGER},
+      </if>
+
+      <if test="userMobile != null" >
+        #{userMobile,jdbcType=BIGINT},
+      </if>
+      <if test="verifyCode != null" >
+        #{verifyCode,jdbcType=INTEGER},
+      </if>
+      <if test="verifyStatus != null" >
+        #{verifyStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tqmall.ticket.dal.entity.TicketUserLoginCode" >
+    update ticket_user_login_code
+    <set >
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="modifier != null" >
+        modifier = #{modifier,jdbcType=INTEGER},
+      </if>
+
+      <if test="userMobile != null" >
+        user_mobile = #{userMobile,jdbcType=BIGINT},
+      </if>
+      <if test="verifyCode != null" >
+        verify_code = #{verifyCode,jdbcType=INTEGER},
+      </if>
+      <if test="verifyStatus != null" >
+        verify_status = #{verifyStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tqmall.ticket.dal.entity.TicketUserLoginCode" >
+    update ticket_user_login_code
+    set is_deleted = #{isDeleted,jdbcType=CHAR},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=INTEGER},
+      modifier = #{modifier,jdbcType=INTEGER},
+
+      user_mobile = #{userMobile,jdbcType=BIGINT},
+      verify_code = #{verifyCode,jdbcType=INTEGER},
+      verify_status = #{verifyStatus,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByMobileAndVerifyCode" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from ticket_user_login_code
+    where user_mobile = #{userMobile}
+    and verify_code = #{verifyCode}
+    and verify_status = 0
+    and is_deleted = 'N'
+  </select>
+
+  <select id="selectByMobile" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from ticket_user_login_code
+    where user_mobile = #{userMobile}
+    and verify_status = 0
+    and is_deleted = 'N'
+    order by gmt_create desc limit 1
+  </select>
+
+  <update id="batchUpdateFailByIdList" >
+    update ticket_user_login_code
+    set gmt_modified = now(),
+    verify_status = 2
+    where
+    id in (
+    <foreach collection="list" item="item" separator=",">
+      #{item.id}
+    </foreach>
+    )
+  </update>
+
+  <update id="batchUpdateSuccessByIdList" >
+    update ticket_user_login_code
+    set gmt_modified = now(),
+    verify_status = 1
+    where
+    id in (
+    <foreach collection="list" item="item" separator=",">
+      #{item.id}
+    </foreach>
+    )
+  </update>
+
+  <update id="dealDeadVerifyCode" >
+    update ticket_user_login_code
+    set gmt_modified = now(),
+    verify_status = 2
+    where
+    verify_status = 0
+    and
+    date_add(gmt_create,INTERVAL 10 MINUTE ) &lt; now()
+  </update>
+</mapper>

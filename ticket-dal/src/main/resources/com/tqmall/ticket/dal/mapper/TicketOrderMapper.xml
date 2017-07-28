@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tqmall.ticket.dal.mapper.TicketOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.tqmall.ticket.dal.entity.TicketOrder" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="is_deleted" property="isDeleted" jdbcType="CHAR" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="creator" property="creator" jdbcType="INTEGER" />
+    <result column="modifier" property="modifier" jdbcType="INTEGER" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="movie_show_time" property="movieShowTime" jdbcType="TIMESTAMP" />
+    <result column="schedule_id" property="scheduleId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="order_seat" property="orderSeat" jdbcType="VARCHAR" />
+    <result column="order_tickets" property="orderTickets" jdbcType="INTEGER" />
+    <result column="order_tickets_no" property="orderTicketsNo" jdbcType="VARCHAR" />
+    <result column="order_present_price" property="orderPresentPrice" jdbcType="DECIMAL" />
+    <result column="order_cinema_price" property="orderCinemaPrice" jdbcType="DECIMAL" />
+    <result column="order_preferential_price" property="orderPreferentialPrice" jdbcType="DECIMAL" />
+    <result column="order_mobile" property="orderMobile" jdbcType="BIGINT" />
+    <result column="order_status" property="orderStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, is_deleted, gmt_create, gmt_modified, creator, modifier,
+    order_no,movie_show_time, schedule_id, user_id,
+    order_seat, order_tickets , order_tickets_no ,order_present_price,
+    order_cinema_price, order_preferential_price,
+    order_mobile,order_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ticket_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ticket_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tqmall.ticket.dal.entity.TicketOrder" >
+    insert into ticket_order (id, is_deleted, gmt_create, 
+      gmt_modified, creator, modifier, order_no,movie_show_time,
+      schedule_id, user_id, order_seat, order_tickets,order_tickets_no,
+      order_present_price, order_cinema_price, order_preferential_price,
+      order_mobile,order_status
+      )
+    values (#{id,jdbcType=INTEGER}, #{isDeleted,jdbcType=CHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModified,jdbcType=TIMESTAMP}, #{creator,jdbcType=INTEGER}, #{modifier,jdbcType=INTEGER},
+      #{orderNo},#{movieShowTime},
+      #{scheduleId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{orderSeat,jdbcType=VARCHAR},
+      #{orderTickets},#{orderTicketsNo}
+      #{orderPresentPrice,jdbcType=DECIMAL}, #{orderCinemaPrice,jdbcType=DECIMAL},
+      #{orderPreferentialPrice,jdbcType=DECIMAL},#{orderMobile},#{orderStatus}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tqmall.ticket.dal.entity.TicketOrder" useGeneratedKeys="true" keyProperty="id" >
+    insert into ticket_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="modifier != null" >
+        modifier,
+      </if>
+      <if test="orderNo != null" >
+        order_no,
+      </if>
+      <if test="movieShowTime != null" >
+        movie_show_time,
+      </if>
+      <if test="scheduleId != null" >
+        schedule_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="orderSeat != null" >
+        order_seat,
+      </if>
+      <if test="orderTickets != null" >
+        order_tickets,
+      </if>
+      <if test="orderTicketsNo != null" >
+        order_tickets_no,
+      </if>
+      <if test="orderPresentPrice != null" >
+        order_present_price,
+      </if>
+      <if test="orderCinemaPrice != null" >
+        order_cinema_price,
+      </if>
+      <if test="orderPreferentialPrice != null" >
+        order_preferential_price,
+      </if>
+      <if test="orderMobile != null" >
+        order_mobile,
+      </if>
+      <if test="orderStatus != null" >
+        order_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="modifier != null" >
+        #{modifier,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo},
+      </if>
+      <if test="movieShowTime != null" >
+        #{movieShowTime},
+      </if>
+      <if test="scheduleId != null" >
+        #{scheduleId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="orderSeat != null" >
+        #{orderSeat,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTickets != null" >
+        #{orderTickets},
+      </if>
+      <if test="orderTicketsNo != null" >
+        #{order_tickets_no},
+      </if>
+      <if test="orderPresentPrice != null" >
+        #{orderPresentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderCinemaPrice != null" >
+        #{orderCinemaPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderPreferentialPrice != null" >
+        #{orderPreferentialPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderMobile != null" >
+        #{orderMobile},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tqmall.ticket.dal.entity.TicketOrder" >
+    update ticket_order
+    <set >
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="modifier != null" >
+        modifier = #{modifier,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null" >
+        order_no = #{orderNo},
+      </if>
+      <if test="movieShowTime != null" >
+        movie_show_time = #{movieShowTime},
+      </if>
+      <if test="scheduleId != null" >
+        schedule_id = #{scheduleId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="orderSeat != null" >
+        order_seat = #{orderSeat,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTickets != null" >
+        order_tickets = #{orderTickets},
+      </if>
+      <if test="orderTicketsNo != null" >
+        order_tickets_no = #{orderTicketsNo},
+      </if>
+      <if test="orderPresentPrice != null" >
+        order_present_price = #{orderPresentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderCinemaPrice != null" >
+        order_cinema_price = #{orderCinemaPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderPreferentialPrice != null" >
+        order_preferential_price = #{orderPreferentialPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderMobile != null" >
+        order_mobile = #{orderMobile},
+      </if>
+      <if test="orderStatus != null" >
+        order_status = #{orderStatus},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tqmall.ticket.dal.entity.TicketOrder" >
+    update ticket_order
+    set is_deleted = #{isDeleted,jdbcType=CHAR},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=INTEGER},
+      modifier = #{modifier,jdbcType=INTEGER},
+      order_no = #{orderNo},movie_show_time = #{movieShowTime}
+      schedule_id = #{scheduleId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      order_seat = #{orderSeat,jdbcType=VARCHAR},
+      order_tickets = #{orderTickets},
+      order_tickets_no = #{orderTicketsNo},
+      order_present_price = #{orderPresentPrice,jdbcType=DECIMAL},
+      order_cinema_price = #{orderCinemaPrice,jdbcType=DECIMAL},
+      order_preferential_price = #{orderPreferentialPrice,jdbcType=DECIMAL},
+      order_mobile = #{orderMobile},
+      order_status = #{orderStatus}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectAllByUserId" resultMap="BaseResultMap" parameterType="com.tqmall.ticket.dal.param.DOrderParam">
+    select
+    <include refid="Base_Column_List" />
+    from ticket_order
+    where user_id = #{userId}
+    and is_deleted = 'N'
+    order by gmt_create desc
+    <if test="beginNum != null and pageSize != null">
+      limit #{beginNum},#{pageSize}
+    </if>
+  </select>
+
+  <select id="selectLockSeatByScheduleId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    gmt_create,
+    order_seat
+    from ticket_order
+    where schedule_id = #{scheduleId}
+    and order_status = 0
+    and is_deleted = 'N'
+  </select>
+
+  <update id="dealDeadOrder" parameterType="java.lang.String">
+    update ticket_order
+     set order_status = 3
+     where order_no = #{orderNo}
+  </update>
+
+  <select id="getWaitPayOrderCount" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+    select
+    count(1)
+    from ticket_order
+    where user_id = #{userId}
+    and order_status = 0
+    and is_deleted = 'N'
+  </select>
+
+  <select id="selectAllWaitPayByUserId" resultMap="BaseResultMap" parameterType="com.tqmall.ticket.dal.param.DOrderParam">
+    select
+    <include refid="Base_Column_List" />
+    from ticket_order
+    where user_id = #{userId}
+    and order_status = 0
+    and is_deleted = 'N'
+    order by gmt_create desc
+    <if test="beginNum != null and pageSize != null">
+      limit #{beginNum},#{pageSize}
+    </if>
+  </select>
+</mapper>

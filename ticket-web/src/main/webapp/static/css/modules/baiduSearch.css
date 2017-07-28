@@ -1,0 +1,30 @@
+.datalist-wrap {
+    position: relative;
+    display: inline-block;
+}
+
+.datalist {
+    position: absolute;
+    border: 1px solid #ccc;
+    /*width: 400px;*/
+    padding: 5px 0;
+    display: none;
+    background: #fff;
+    z-index: 999;
+}
+
+.datalist li {
+    padding-left: 10px;
+    cursor: pointer;
+    height: 25px;
+    line-height: 25px;
+}
+.datalist li.active{
+    background-color: #3c8dbc;
+}
+.form-group .text-l {
+    text-align: left;
+}
+/*.datalist li.canUse:hover {*/
+  /*background-color: #3c8dbc;*/
+/*}*/

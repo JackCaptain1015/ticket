@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tqmall.ticket.dal.mapper.TicketSpecificScheduleMapper" >
+  <resultMap id="BaseResultMap" type="com.tqmall.ticket.dal.entity.TicketSpecificSchedule" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="is_deleted" property="isDeleted" jdbcType="CHAR" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="creator" property="creator" jdbcType="INTEGER" />
+    <result column="modifier" property="modifier" jdbcType="INTEGER" />
+    <result column="movie_id" property="movieId" jdbcType="INTEGER" />
+    <result column="movie_name" property="movieName" jdbcType="VARCHAR" />
+    <result column="cinema_id" property="cinemaId" jdbcType="INTEGER" />
+    <result column="cinema_name" property="cinemaName" jdbcType="VARCHAR" />
+    <result column="movie_show_time" property="movieShowTime" jdbcType="TIMESTAMP" />
+    <result column="movie_end_time" property="movieEndTime" jdbcType="TIMESTAMP" />
+    <result column="movie_language_version" property="movieLanguageVersion" jdbcType="VARCHAR" />
+    <result column="showroom_id" property="showroomId" jdbcType="INTEGER" />
+    <result column="showroom_name" property="showroomName" jdbcType="VARCHAR" />
+
+    <result column="exist_seat_table" property="existSeatTable" jdbcType="VARCHAR" />
+    <result column="present_price" property="presentPrice" jdbcType="DECIMAL" />
+    <result column="cinema_price" property="cinemaPrice" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, is_deleted, gmt_create, gmt_modified, creator, modifier, movie_id, movie_name, cinema_id, cinema_name,
+    movie_show_time, movie_end_time, movie_language_version, showroom_id,showroom_name, exist_seat_table,
+    present_price, cinema_price
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ticket_specific_schedule
+    where id = #{id,jdbcType=INTEGER}
+    and is_deleted = 'N'
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ticket_specific_schedule
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tqmall.ticket.dal.entity.TicketSpecificSchedule" >
+    insert into ticket_specific_schedule (id, is_deleted, gmt_create, 
+      gmt_modified, creator, modifier, 
+      movie_id,movie_name, cinema_id,cinema_name, movie_show_time,
+      movie_end_time, movie_language_version, showroom_id, showroom_name,
+      exist_seat_table, present_price, cinema_price
+      )
+    values (#{id,jdbcType=INTEGER}, #{isDeleted,jdbcType=CHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModified,jdbcType=TIMESTAMP}, #{creator,jdbcType=INTEGER}, #{modifier,jdbcType=INTEGER}, 
+      #{movieId,jdbcType=INTEGER},#{movieName}, #{cinemaId,jdbcType=INTEGER},#{cinemaName} ,#{movieShowTime,jdbcType=TIMESTAMP},
+      #{movieEndTime,jdbcType=TIMESTAMP}, #{movieLanguageVersion,jdbcType=VARCHAR}, #{showroomId,jdbcType=INTEGER},
+      #{showroomName,jdbcType=VARCHAR},#{existSeatTable,jdbcType=VARCHAR}, #{presentPrice,jdbcType=DECIMAL}, #{cinemaPrice,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tqmall.ticket.dal.entity.TicketSpecificSchedule" >
+    insert into ticket_specific_schedule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="modifier != null" >
+        modifier,
+      </if>
+      <if test="movieId != null" >
+        movie_id,
+      </if>
+      <if test="movieName != null" >
+        movie_name,
+      </if>
+      <if test="cinemaId != null" >
+        cinema_id,
+      </if>
+      <if test="cinemaName != null" >
+        cinema_name,
+      </if>
+      <if test="movieShowTime != null" >
+        movie_show_time,
+      </if>
+      <if test="movieEndTime != null" >
+        movie_end_time,
+      </if>
+      <if test="movieLanguageVersion != null" >
+        movie_language_version,
+      </if>
+      <if test="showroomId != null" >
+        showroom_id,
+      </if>
+      <if test="showroomName != null" >
+        showroom_name,
+      </if>
+      <if test="existSeatTable != null" >
+        exist_seat_table,
+      </if>
+      <if test="presentPrice != null" >
+        present_price,
+      </if>
+      <if test="cinemaPrice != null" >
+        cinema_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="modifier != null" >
+        #{modifier,jdbcType=INTEGER},
+      </if>
+      <if test="movieId != null" >
+        #{movieId,jdbcType=INTEGER},
+      </if>
+      <if test="movieName != null" >
+        #{movieName},
+      </if>
+      <if test="cinemaId != null" >
+        #{cinemaId,jdbcType=INTEGER},
+      </if>
+      <if test="cinemaName != null" >
+        #{cinemaName},
+      </if>
+      <if test="movieShowTime != null" >
+        #{movieShowTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="movieEndTime != null" >
+        #{movieEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="movieLanguageVersion != null" >
+        #{movieLanguageVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="showroomId != null" >
+        #{showroomId,jdbcType=INTEGER},
+      </if>
+      <if test="showroomName != null" >
+        #{showroomName,jdbcType=VARCHAR},
+      </if>
+      <if test="existSeatTable != null" >
+        #{existSeatTable,jdbcType=VARCHAR},
+      </if>
+      <if test="presentPrice != null" >
+        #{presentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="cinemaPrice != null" >
+        #{cinemaPrice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tqmall.ticket.dal.entity.TicketSpecificSchedule" >
+    update ticket_specific_schedule
+    <set >
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="modifier != null" >
+        modifier = #{modifier,jdbcType=INTEGER},
+      </if>
+      <if test="movieId != null" >
+        movie_id = #{movieId,jdbcType=INTEGER},
+      </if>
+      <if test="movieName != null" >
+        movie_name = #{movieName},
+      </if>
+      <if test="cinemaId != null" >
+        cinema_id = #{cinemaId,jdbcType=INTEGER},
+      </if>
+      <if test="cinemaName != null" >
+        cinema_name = #{cinemaName},
+      </if>
+      <if test="movieShowTime != null" >
+        movie_show_time = #{movieShowTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="movieEndTime != null" >
+        movie_end_time = #{movieEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="movieLanguageVersion != null" >
+        movie_language_version = #{movieLanguageVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="showroomId != null" >
+        showroom_id = #{showroomId,jdbcType=INTEGER},
+      </if>
+      <if test="showroomName != null" >
+        showroom_name = #{showroomName,jdbcType=VARCHAR},
+      </if>
+      <if test="existSeatTable != null" >
+        exist_seat_table = #{existSeatTable,jdbcType=VARCHAR},
+      </if>
+      <if test="presentPrice != null" >
+        present_price = #{presentPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="cinemaPrice != null" >
+        cinema_price = #{cinemaPrice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tqmall.ticket.dal.entity.TicketSpecificSchedule" >
+    update ticket_specific_schedule
+    set is_deleted = #{isDeleted,jdbcType=CHAR},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=INTEGER},
+      modifier = #{modifier,jdbcType=INTEGER},
+      movie_id = #{movieId,jdbcType=INTEGER},
+      movie_name = #{movieName},
+      cinema_id = #{cinemaId,jdbcType=INTEGER},
+      cinema_name = #{cinemaName},
+      movie_show_time = #{movieShowTime,jdbcType=TIMESTAMP},
+      movie_end_time = #{movieEndTime,jdbcType=TIMESTAMP},
+      movie_language_version = #{movieLanguageVersion,jdbcType=VARCHAR},
+      showroom_id = #{showroomId,jdbcType=INTEGER},
+      showroom_name = #{showroomName,jdbcType=VARCHAR},
+      exist_seat_table = #{existSeatTable,jdbcType=VARCHAR},
+      present_price = #{presentPrice,jdbcType=DECIMAL},
+      cinema_price = #{cinemaPrice,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectListByMovieIdAndCinemaId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from ticket_specific_schedule
+    where movie_id = #{movieId}
+    and cinema_id = #{cinemaId}
+    and movie_show_time &gt;= #{beginTime}
+    and movie_end_time &lt;= #{endTime}
+    and is_deleted = 'N'
+    order by movie_show_time asc
+  </select>
+
+  <select id="selectByIdList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from ticket_specific_schedule
+    where id in (
+    <foreach collection="list" item="item" separator=",">
+     #{item}
+    </foreach>
+    )
+    and is_deleted = 'N'
+  </select>
+</mapper>

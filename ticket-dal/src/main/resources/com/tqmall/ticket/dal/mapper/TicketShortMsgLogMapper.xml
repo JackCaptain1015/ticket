@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tqmall.ticket.dal.mapper.TicketShortMsgLogMapper" >
+  <resultMap id="BaseResultMap" type="com.tqmall.ticket.dal.entity.TicketShortMsgLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="is_deleted" property="isDeleted" jdbcType="CHAR" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="creator" property="creator" jdbcType="INTEGER" />
+    <result column="modifier" property="modifier" jdbcType="INTEGER" />
+    <result column="msg_mobile" property="msgMobile" jdbcType="BIGINT" />
+    <result column="msg_value" property="msgValue" jdbcType="VARCHAR" />
+    <result column="msg_deadline_time" property="msgDeadlineTime" jdbcType="TIMESTAMP" />
+    <result column="msg_status" property="msgStatus" jdbcType="INTEGER" />
+    <result column="msg_template_id" property="msgTemplateId" jdbcType="BIGINT" />
+    <result column="msg_service_provider" property="msgServiceProvider" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, is_deleted, gmt_create, gmt_modified, creator, modifier, msg_mobile, msg_value, 
+    msg_deadline_time, msg_status, msg_template_id, msg_service_provider
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ticket_short_msg_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ticket_short_msg_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tqmall.ticket.dal.entity.TicketShortMsgLog" >
+    insert into ticket_short_msg_log (id, is_deleted, gmt_create, 
+      gmt_modified, creator, modifier, 
+      msg_mobile, msg_value, msg_deadline_time, 
+      msg_status, msg_template_id, msg_service_provider
+      )
+    values (#{id,jdbcType=INTEGER}, #{isDeleted,jdbcType=CHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModified,jdbcType=TIMESTAMP}, #{creator,jdbcType=INTEGER}, #{modifier,jdbcType=INTEGER}, 
+      #{msgMobile,jdbcType=BIGINT}, #{msgValue,jdbcType=VARCHAR}, #{msgDeadlineTime,jdbcType=TIMESTAMP}, 
+      #{msgStatus,jdbcType=INTEGER}, #{msgTemplateId,jdbcType=BIGINT}, #{msgServiceProvider,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tqmall.ticket.dal.entity.TicketShortMsgLog" >
+    insert into ticket_short_msg_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="modifier != null" >
+        modifier,
+      </if>
+      <if test="msgMobile != null" >
+        msg_mobile,
+      </if>
+      <if test="msgValue != null" >
+        msg_value,
+      </if>
+      <if test="msgDeadlineTime != null" >
+        msg_deadline_time,
+      </if>
+      <if test="msgStatus != null" >
+        msg_status,
+      </if>
+      <if test="msgTemplateId != null" >
+        msg_template_id,
+      </if>
+      <if test="msgServiceProvider != null" >
+        msg_service_provider,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="modifier != null" >
+        #{modifier,jdbcType=INTEGER},
+      </if>
+      <if test="msgMobile != null" >
+        #{msgMobile,jdbcType=BIGINT},
+      </if>
+      <if test="msgValue != null" >
+        #{msgValue,jdbcType=VARCHAR},
+      </if>
+      <if test="msgDeadlineTime != null" >
+        #{msgDeadlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="msgStatus != null" >
+        #{msgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="msgTemplateId != null" >
+        #{msgTemplateId,jdbcType=BIGINT},
+      </if>
+      <if test="msgServiceProvider != null" >
+        #{msgServiceProvider,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tqmall.ticket.dal.entity.TicketShortMsgLog" >
+    update ticket_short_msg_log
+    <set >
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="modifier != null" >
+        modifier = #{modifier,jdbcType=INTEGER},
+      </if>
+      <if test="msgMobile != null" >
+        msg_mobile = #{msgMobile,jdbcType=BIGINT},
+      </if>
+      <if test="msgValue != null" >
+        msg_value = #{msgValue,jdbcType=VARCHAR},
+      </if>
+      <if test="msgDeadlineTime != null" >
+        msg_deadline_time = #{msgDeadlineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="msgStatus != null" >
+        msg_status = #{msgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="msgTemplateId != null" >
+        msg_template_id = #{msgTemplateId,jdbcType=BIGINT},
+      </if>
+      <if test="msgServiceProvider != null" >
+        msg_service_provider = #{msgServiceProvider,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tqmall.ticket.dal.entity.TicketShortMsgLog" >
+    update ticket_short_msg_log
+    set is_deleted = #{isDeleted,jdbcType=CHAR},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=INTEGER},
+      modifier = #{modifier,jdbcType=INTEGER},
+      msg_mobile = #{msgMobile,jdbcType=BIGINT},
+      msg_value = #{msgValue,jdbcType=VARCHAR},
+      msg_deadline_time = #{msgDeadlineTime,jdbcType=TIMESTAMP},
+      msg_status = #{msgStatus,jdbcType=INTEGER},
+      msg_template_id = #{msgTemplateId,jdbcType=BIGINT},
+      msg_service_provider = #{msgServiceProvider,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectAllFailueShortMsg" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    ticket_short_msg_log
+    where msg_status = 0
+    and is_deleted = 'N'
+  </select>
+
+  <update id="batchUpdateDealMsg" parameterType="java.util.List">
+    update ticket_short_msg_log
+    set gmt_modified = now(),
+    msg_status = 1
+    where
+    id in (
+    <foreach collection="list" item="item" separator=",">
+      #{item}
+    </foreach>
+    )
+  </update>
+
+  <update id="dealDeadMsg">
+    update ticket_short_msg_log
+    set is_deleted = 'Y'
+    where msg_deadline_time &lt; now()
+  </update>
+</mapper>

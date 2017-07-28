@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tqmall.ticket.dal.mapper.TicketCinemaMapper" >
+  <resultMap id="BaseResultMap" type="com.tqmall.ticket.dal.entity.TicketCinema" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="is_deleted" property="isDeleted" jdbcType="CHAR" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="creator" property="creator" jdbcType="INTEGER" />
+    <result column="modifier" property="modifier" jdbcType="INTEGER" />
+    <result column="cinema_name" property="cinemaName" jdbcType="VARCHAR" />
+    <result column="cinema_city_id" property="cinemaCityId" jdbcType="INTEGER" />
+    <result column="cinema_city_name" property="cinemaCityName" jdbcType="VARCHAR" />
+    <result column="cinema_area_id" property="cinemaAreaId" jdbcType="INTEGER" />
+    <result column="cinema_area_name" property="cinemaAreaName" jdbcType="VARCHAR" />
+    <result column="cinema_address" property="cinemaAddress" jdbcType="VARCHAR" />
+    <result column="cinema_mobile" property="cinemaMobile" jdbcType="VARCHAR" />
+    <result column="cinema_picture" property="cinemaPicture" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, is_deleted, gmt_create, gmt_modified, creator, modifier, cinema_name, cinema_city_id, 
+    cinema_city_name, cinema_area_id, cinema_area_name, cinema_address, cinema_mobile,cinema_picture
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ticket_cinema
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ticket_cinema
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tqmall.ticket.dal.entity.TicketCinema" >
+    insert into ticket_cinema (id, is_deleted, gmt_create, 
+      gmt_modified, creator, modifier, 
+      cinema_name, cinema_city_id, cinema_city_name, 
+      cinema_area_id, cinema_area_name, cinema_address, 
+      cinema_mobile,cinema_picture)
+    values (#{id,jdbcType=INTEGER}, #{isDeleted,jdbcType=CHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModified,jdbcType=TIMESTAMP}, #{creator,jdbcType=INTEGER}, #{modifier,jdbcType=INTEGER}, 
+      #{cinemaName,jdbcType=VARCHAR}, #{cinemaCityId,jdbcType=INTEGER}, #{cinemaCityName,jdbcType=VARCHAR}, 
+      #{cinemaAreaId,jdbcType=INTEGER}, #{cinemaAreaName,jdbcType=VARCHAR}, #{cinemaAddress,jdbcType=VARCHAR}, 
+      #{cinemaMobile,jdbcType=VARCHAR},#{cinemaPicture,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tqmall.ticket.dal.entity.TicketCinema" >
+    insert into ticket_cinema
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="modifier != null" >
+        modifier,
+      </if>
+      <if test="cinemaName != null" >
+        cinema_name,
+      </if>
+      <if test="cinemaCityId != null" >
+        cinema_city_id,
+      </if>
+      <if test="cinemaCityName != null" >
+        cinema_city_name,
+      </if>
+      <if test="cinemaAreaId != null" >
+        cinema_area_id,
+      </if>
+      <if test="cinemaAreaName != null" >
+        cinema_area_name,
+      </if>
+      <if test="cinemaAddress != null" >
+        cinema_address,
+      </if>
+      <if test="cinemaMobile != null" >
+        cinema_mobile,
+      </if>
+      <if test="cinemaPicture != null" >
+        cinema_picture,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="modifier != null" >
+        #{modifier,jdbcType=INTEGER},
+      </if>
+      <if test="cinemaName != null" >
+        #{cinemaName,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaCityId != null" >
+        #{cinemaCityId,jdbcType=INTEGER},
+      </if>
+      <if test="cinemaCityName != null" >
+        #{cinemaCityName,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaAreaId != null" >
+        #{cinemaAreaId,jdbcType=INTEGER},
+      </if>
+      <if test="cinemaAreaName != null" >
+        #{cinemaAreaName,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaAddress != null" >
+        #{cinemaAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaMobile != null" >
+        #{cinemaMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaPicture != null" >
+        #{cinemaPicture,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tqmall.ticket.dal.entity.TicketCinema" >
+    update ticket_cinema
+    <set >
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="modifier != null" >
+        modifier = #{modifier,jdbcType=INTEGER},
+      </if>
+      <if test="cinemaName != null" >
+        cinema_name = #{cinemaName,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaCityId != null" >
+        cinema_city_id = #{cinemaCityId,jdbcType=INTEGER},
+      </if>
+      <if test="cinemaCityName != null" >
+        cinema_city_name = #{cinemaCityName,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaAreaId != null" >
+        cinema_area_id = #{cinemaAreaId,jdbcType=INTEGER},
+      </if>
+      <if test="cinemaAreaName != null" >
+        cinema_area_name = #{cinemaAreaName,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaAddress != null" >
+        cinema_address = #{cinemaAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaMobile != null" >
+        cinema_mobile = #{cinemaMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaPicture != null" >
+        cinema_picture = #{cinemaPicture,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tqmall.ticket.dal.entity.TicketCinema" >
+    update ticket_cinema
+    set is_deleted = #{isDeleted,jdbcType=CHAR},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=INTEGER},
+      modifier = #{modifier,jdbcType=INTEGER},
+      cinema_name = #{cinemaName,jdbcType=VARCHAR},
+      cinema_city_id = #{cinemaCityId,jdbcType=INTEGER},
+      cinema_city_name = #{cinemaCityName,jdbcType=VARCHAR},
+      cinema_area_id = #{cinemaAreaId,jdbcType=INTEGER},
+      cinema_area_name = #{cinemaAreaName,jdbcType=VARCHAR},
+      cinema_address = #{cinemaAddress,jdbcType=VARCHAR},
+      cinema_mobile = #{cinemaMobile,jdbcType=VARCHAR},
+      cinema_picture = #{cinemaPicture,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByCityId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from ticket_cinema
+    where cinema_city_id = #{cityId}
+    and is_deleted = 'N'
+    limit 0,5
+  </select>
+
+  <select id="selectByAreaId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from ticket_cinema
+    where cinema_area_id = #{areaId}
+    and is_deleted = 'N'
+  </select>
+
+  <select id="searchByParam" resultMap="BaseResultMap" parameterType="com.tqmall.ticket.dal.param.DCinemaParam">
+    select
+    <include refid="Base_Column_List"/>
+    from ticket_cinema
+    where
+    is_deleted = 'N'
+    <if test="cityId != null">
+      and cinema_city_id = #{cityId}
+    </if>
+    <if test="areaId != null">
+      and cinema_area_id = #{areaId}
+    </if>
+    <if test="param != null and param != ''">
+      and cinema_name like CONCAT('%',#{param},'%')
+    </if>
+    <if test="beginNum != null and pageSize != null">
+      limit #{beginNum},#{pageSize}
+    </if>
+  </select>
+</mapper>

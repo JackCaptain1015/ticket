@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tqmall.ticket.dal.mapper.TicketMovieMapper" >
+  <resultMap id="BaseResultMap" type="com.tqmall.ticket.dal.entity.TicketMovie" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="is_deleted" property="isDeleted" jdbcType="CHAR" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="creator" property="creator" jdbcType="INTEGER" />
+    <result column="modifier" property="modifier" jdbcType="INTEGER" />
+    <result column="movie_name" property="movieName" jdbcType="VARCHAR" />
+    <result column="movie_director" property="movieDirector" jdbcType="VARCHAR" />
+    <result column="movie_actor" property="movieActor" jdbcType="VARCHAR" />
+    <result column="movie_type" property="movieType" jdbcType="VARCHAR" />
+    <result column="movie_product" property="movieProduct" jdbcType="VARCHAR" />
+    <result column="movie_language" property="movieLanguage" jdbcType="VARCHAR" />
+    <result column="movie_length" property="movieLength" jdbcType="INTEGER" />
+    <result column="movie_desc" property="movieDesc" jdbcType="VARCHAR" />
+    <result column="movie_status" property="movieStatus" jdbcType="INTEGER" />
+    <result column="movie_picture" property="moviePicture" jdbcType="VARCHAR" />
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, is_deleted, gmt_create, gmt_modified, creator, modifier, movie_name, movie_director,movie_actor,
+    movie_type, movie_product, movie_language, movie_length, movie_desc,movie_status,movie_picture
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ticket_movie
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ticket_movie
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tqmall.ticket.dal.entity.TicketMovie" >
+    insert into ticket_movie (id, is_deleted, gmt_create, 
+      gmt_modified, creator, modifier, 
+      movie_name, movie_director,movie_actor, movie_type,
+      movie_product, movie_language, movie_length, 
+      movie_desc,movie_status,movie_picture)
+    values (#{id,jdbcType=INTEGER}, #{isDeleted,jdbcType=CHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModified,jdbcType=TIMESTAMP}, #{creator,jdbcType=INTEGER}, #{modifier,jdbcType=INTEGER}, 
+      #{movieName,jdbcType=VARCHAR}, #{movieDirector,jdbcType=VARCHAR},#{movieActor,jdbcType=VARCHAR} #{movieType,jdbcType=VARCHAR},
+      #{movieProduct,jdbcType=VARCHAR}, #{movieLanguage,jdbcType=VARCHAR}, #{movieLength,jdbcType=INTEGER}, 
+      #{movieDesc,jdbcType=VARCHAR},#{movieStatus,jdbcType=INTEGER},#{moviePicture,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tqmall.ticket.dal.entity.TicketMovie" >
+    insert into ticket_movie
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="modifier != null" >
+        modifier,
+      </if>
+      <if test="movieName != null" >
+        movie_name,
+      </if>
+      <if test="movieDirector != null" >
+        movie_director,
+      </if>
+      <if test="movieActor != null" >
+        movie_actor,
+      </if>
+      <if test="movieType != null" >
+        movie_type,
+      </if>
+      <if test="movieProduct != null" >
+        movie_product,
+      </if>
+      <if test="movieLanguage != null" >
+        movie_language,
+      </if>
+      <if test="movieLength != null" >
+        movie_length,
+      </if>
+      <if test="movieDesc != null" >
+        movie_desc,
+      </if>
+      <if test="movieStatus != null" >
+        movie_status,
+      </if>
+      <if test="moviePicture != null" >
+        movie_picture,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="modifier != null" >
+        #{modifier,jdbcType=INTEGER},
+      </if>
+      <if test="movieName != null" >
+        #{movieName,jdbcType=VARCHAR},
+      </if>
+      <if test="movieDirector != null" >
+        #{movieDirector,jdbcType=VARCHAR},
+      </if>
+      <if test="movieActor != null" >
+        #{movieActor,jdbcType=VARCHAR},
+      </if>
+      <if test="movieType != null" >
+        #{movieType,jdbcType=VARCHAR},
+      </if>
+      <if test="movieProduct != null" >
+        #{movieProduct,jdbcType=VARCHAR},
+      </if>
+      <if test="movieLanguage != null" >
+        #{movieLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="movieLength != null" >
+        #{movieLength,jdbcType=INTEGER},
+      </if>
+      <if test="movieDesc != null" >
+        #{movieDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="movieStatus != null" >
+        #{movieStatus,jdbcType=INTEGER},
+      </if>
+      <if test="moviePicture != null" >
+        #{moviePicture,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tqmall.ticket.dal.entity.TicketMovie" >
+    update ticket_movie
+    <set >
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="modifier != null" >
+        modifier = #{modifier,jdbcType=INTEGER},
+      </if>
+      <if test="movieName != null" >
+        movie_name = #{movieName,jdbcType=VARCHAR},
+      </if>
+      <if test="movieDirector != null" >
+        movie_director = #{movieDirector,jdbcType=VARCHAR},
+      </if>
+      <if test="movieActor != null" >
+        movie_actor = #{movieActor,jdbcType=VARCHAR},
+      </if>
+      <if test="movieType != null" >
+        movie_type = #{movieType,jdbcType=VARCHAR},
+      </if>
+      <if test="movieProduct != null" >
+        movie_product = #{movieProduct,jdbcType=VARCHAR},
+      </if>
+      <if test="movieLanguage != null" >
+        movie_language = #{movieLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="movieLength != null" >
+        movie_length = #{movieLength,jdbcType=INTEGER},
+      </if>
+      <if test="movieDesc != null" >
+        movie_desc = #{movieDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="movieStatus != null" >
+        movie_status = #{movieStatus,jdbcType=INTEGER},
+      </if>
+      <if test="moviePicture != null" >
+        movie_picture = #{moviePicture,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tqmall.ticket.dal.entity.TicketMovie" >
+    update ticket_movie
+    set is_deleted = #{isDeleted,jdbcType=CHAR},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=INTEGER},
+      modifier = #{modifier,jdbcType=INTEGER},
+      movie_name = #{movieName,jdbcType=VARCHAR},
+      movie_director = #{movieDirector,jdbcType=VARCHAR},
+      movie_actor = #{movieActor,jdbcType=VARCHAR},
+      movie_type = #{movieType,jdbcType=VARCHAR},
+      movie_product = #{movieProduct,jdbcType=VARCHAR},
+      movie_language = #{movieLanguage,jdbcType=VARCHAR},
+      movie_length = #{movieLength,jdbcType=INTEGER},
+      movie_desc = #{movieDesc,jdbcType=VARCHAR},
+      movie_status = #{movieStatus,jdbcType=INTEGER},
+      movie_picture = #{moviePicture,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectAllShowingMovie" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List"/>
+    from ticket_movie
+    where movie_status = 1
+    and is_deleted = 'N'
+    order by gmt_create asc
+    <if test="pageSize != null and pageSize != 0">
+      limit 0,#{pageSize}
+    </if>
+  </select>
+
+  <select id="selectReadyShowingMovie" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from ticket_movie
+    where movie_status = 2
+    and is_deleted = 'N'
+    order by gmt_create asc
+    <if test="pageSize != null and pageSize != 0">
+      limit 0,#{pageSize}
+    </if>
+  </select>
+</mapper>
