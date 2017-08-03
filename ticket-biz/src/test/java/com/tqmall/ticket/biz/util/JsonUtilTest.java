@@ -9,6 +9,7 @@ import com.tqmall.ticket.common.ReflectUtil;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -44,13 +45,6 @@ public class JsonUtilTest {
             return "json错误了";
         }
         return "正确";
-    }
-
-    @Test
-    public void test() throws IllegalAccessException {
-        StudentTestBean studentTestBean = new StudentTestBean();
-        System.out.println(ReflectUtil.setNullDefaultValueForBean(studentTestBean));
-
     }
 
 }

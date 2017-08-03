@@ -505,25 +505,29 @@ public abstract class ReflectUtil {
 		List<Field> fieldList = ReflectUtil.getFields(bean.getClass());
 		for (Field field : fieldList) {
 			field.setAccessible(true);
-			if (field.getType().isAssignableFrom(BigDecimal.class)){
-				field.set(bean,BigDecimal.ZERO);
-			}else if (field.getType().isAssignableFrom(Byte.class)){
-				field.set(bean,(byte)0);
-			}else if (field.getType().isAssignableFrom(Short.class)){
-				field.set(bean,(short)0);
-			}else if (field.getType().isAssignableFrom(Integer.class)){
-				field.set(bean,0);
-			}else if (field.getType().isAssignableFrom(Long.class)){
-				field.set(bean,0L);
-			}else if (field.getType().isAssignableFrom(Float.class)){
-				field.set(bean,0.0f);
-			}else if (field.getType().isAssignableFrom(Double.class)){
-				field.set(bean,0.0d);
-			}else if(field.getType().isAssignableFrom(String.class)){
-				field.set(bean,"");
-			}else if(field.getType().isAssignableFrom(Boolean.class)){
-				field.set(bean,false);
+			Object value = field.get(bean);
+			if (value == null){
+				if (field.getType().isAssignableFrom(BigDecimal.class)){
+					field.set(bean,BigDecimal.ZERO);
+				}else if (field.getType().isAssignableFrom(Byte.class)){
+					field.set(bean,(byte)0);
+				}else if (field.getType().isAssignableFrom(Short.class)){
+					field.set(bean,(short)0);
+				}else if (field.getType().isAssignableFrom(Integer.class)){
+					field.set(bean,0);
+				}else if (field.getType().isAssignableFrom(Long.class)){
+					field.set(bean,0L);
+				}else if (field.getType().isAssignableFrom(Float.class)){
+					field.set(bean,0.0f);
+				}else if (field.getType().isAssignableFrom(Double.class)){
+					field.set(bean,0.0d);
+				}else if(field.getType().isAssignableFrom(String.class)){
+					field.set(bean,"");
+				}else if(field.getType().isAssignableFrom(Boolean.class)){
+					field.set(bean,false);
+				}
 			}
+
 		}
 		return bean;
 	}

@@ -10,7 +10,9 @@ import java.lang.reflect.Field;
  */
 public class ReflectUtilTest {
     @Test
-    public void getFieldTest() throws InterruptedException {
-
+    public void getFieldTest() throws InterruptedException, IllegalAccessException {
+        StudentTestBean studentTestBean = new StudentTestBean();
+        ReflectUtil.setNullDefaultValueForBean(studentTestBean);
+        System.out.println(studentTestBean);
     }
 }
