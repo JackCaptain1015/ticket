@@ -2,6 +2,7 @@ package com.tqmall.ticket.common;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONException;
@@ -10,8 +11,10 @@ import org.json.JSONObject;
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 
 /**
  * JsonUtil
@@ -113,5 +116,32 @@ public class JsonUtil {
             return "";
         }
         return "{\""+keyName+"\":"+JSON.toJSONString(list)+"}";
+    }
+
+    /**解析Json数组，得到某个key下面的json数组中的某个key的value集合
+     * 如:{"userlist":[{"name":"name","userid":"036510211921368142"}]}
+     */
+    public static List<String> getJsonArrayValueInKey(String jsonStr,String key,String keyInArray){
+        com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(jsonStr);
+        JSONArray jsonArray = JSON.parseArray(jsonObject.getString(key));
+        Iterator<Object> iterator = jsonArray.iterator();
+
+        List<String> returnList = Lists.newArrayList();
+        while (iterator.hasNext()){
+            com.alibaba.fastjson.JSONObject next = (com.alibaba.fastjson.JSONObject)iterator.next();
+            returnList.add(next.get(keyInArray).toString());
+        }
+        return returnList;
+    }
+
+    /***
+     * 解析Json数组，得到某个key下面的json数组，并返回相应对象集合
+     */
+    public static <T> List<T> getJsonArrayBean(String jsonStr,String key,Class<T> clazz){
+        com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(jsonStr);
+        JSONArray jsonArray = JSON.parseArray(jsonObject.getString(key));
+        List<T> returnList = JSON.parseArray(jsonArray.toJSONString(), clazz);
+
+        return returnList;
     }
 }

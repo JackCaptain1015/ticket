@@ -47,4 +47,19 @@ public class JsonUtilTest {
         return "正确";
     }
 
+    @Test
+    public void getJsonArrayValueInKeyTest(){
+        String jsonStr = "{\"userlist\":[{\"name\":\"name\",\"userid\":\"036510211921368142\"}]}";
+        List<String> jsonArrayValueInKeyList = JsonUtil.getJsonArrayValueInKey(jsonStr, "userlist", "userid");
+        System.out.println(jsonArrayValueInKeyList);
+    }
+
+    @Test
+    public void getJsonArrayBeanTest(){
+        String jsonstr = "{\"userlist\":[{\"name\":\"name\",\"userid\":\"09133132976231\"}]}";
+
+        List<UserTestBean> userlist = JsonUtil.getJsonArrayBean(jsonstr, "userlist", UserTestBean.class);
+        System.out.println(userlist);
+    }
+
 }
