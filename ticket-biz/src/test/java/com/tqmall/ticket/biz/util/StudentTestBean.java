@@ -12,6 +12,8 @@ import java.math.BigDecimal;
 
 @Data
 public class StudentTestBean {
+    private Long id;
+
     private String studentName;
 
     private Integer studentAge;

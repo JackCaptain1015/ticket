@@ -501,7 +501,7 @@ public abstract class ReflectUtil {
 	 * @return
 	 * @throws IllegalAccessException
 	 */
-	public static <T> T setNullDefaultValueForBean(T bean) throws IllegalAccessException {
+	public static <T> T setDefaultValueForNull(T bean) throws IllegalAccessException {
 		List<Field> fieldList = ReflectUtil.getFields(bean.getClass());
 		for (Field field : fieldList) {
 			field.setAccessible(true);
@@ -530,6 +530,13 @@ public abstract class ReflectUtil {
 
 		}
 		return bean;
+	}
+
+	public static <T> List<T> setDefaultValueForNull(List<T> beanList) throws IllegalAccessException {
+		for (T bean : beanList) {
+			setDefaultValueForNull(bean);
+		}
+		return beanList;
 	}
 
 

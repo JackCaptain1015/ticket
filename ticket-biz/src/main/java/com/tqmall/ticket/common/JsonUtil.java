@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections.map.LinkedMap;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,10 +12,7 @@ import org.json.JSONObject;
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * JsonUtil
@@ -143,5 +141,62 @@ public class JsonUtil {
         List<T> returnList = JSON.parseArray(jsonArray.toJSONString(), clazz);
 
         return returnList;
+    }
+
+    /**
+     * 复杂json转化为Map
+     * @param jsonStr
+     * @return
+     */
+    public static Map jsonStr2Map(String jsonStr) {
+        LinkedMap linkedMap = new LinkedMap();
+        com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(jsonStr);
+        jsonObject2Map(jsonObject, linkedMap);
+        return linkedMap;
+    }
+
+    private static Map jsonObject2Map(com.alibaba.fastjson.JSONObject jsonObject, Map map) {
+        for (Iterator iterator = jsonObject.entrySet().iterator(); iterator.hasNext();) {
+            String entryStr = String.valueOf(iterator.next());
+            String key = entryStr.substring(0, entryStr.indexOf("="));
+            String value = entryStr.substring(entryStr.indexOf("=") + 1,
+                    entryStr.length());
+            if ( com.alibaba.fastjson.JSONObject.class.equals(jsonObject.get(key).getClass()) ) {
+
+                Map sonMap = new HashMap();
+                map.put(key, sonMap);
+                jsonObject2Map(jsonObject.getJSONObject(key), sonMap);
+
+            } else if ( JSONArray.class.equals(jsonObject.get(key).getClass()) ) {
+
+                List sonList = new ArrayList();
+                map.put(key, sonList);
+                populateArray(jsonObject.getJSONArray(key), sonList);
+
+            } else {
+                map.put(key, jsonObject.get(key));
+            }
+        }
+
+        return map;
+    }
+
+    private static void populateArray(JSONArray jsonArray, List list) {
+        for (int i = 0; i < jsonArray.size(); i++)
+            if ( JSONArray.class.equals(jsonArray.get(i).getClass()) ) {
+
+                List sonList = new ArrayList();
+                list.add(sonList);
+                populateArray(jsonArray.getJSONArray(i), sonList);
+
+            } else if ( com.alibaba.fastjson.JSONObject.class.equals(jsonArray.get(i).getClass()) ) {
+
+                Map sonMap = new HashMap();
+                list.add(sonMap);
+                jsonObject2Map(jsonArray.getJSONObject(i), sonMap);
+
+            } else {
+                list.add(jsonArray.get(i));
+            }
     }
 }
