@@ -215,7 +215,7 @@ public class CommonStringUtils {
      * @return
      */
     public static boolean isNumeric(String numberString) {
-        Pattern pattern = Pattern.compile("(^-?[1-9]\\d*$)|(^-?[1-9]\\d*\\.\\d+|-?^0\\.\\d*[1-9]\\d+$)");
+        Pattern pattern = Pattern.compile("(^-?[1-9]\\d*$)|(^-?[1-9]\\d*\\.\\d+$)|(^-?0\\.\\d+$)|(^\\d+$)");
         Matcher isNum = pattern.matcher(numberString);
         if (!isNum.matches()) {
             return false;
