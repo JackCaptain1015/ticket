@@ -1046,12 +1046,13 @@ public abstract class AbstractQueuedSynchronizer
         boolean failed = true;
         try {
             for (;;) {
+                //如果前置节点是head节点，那么去尝试获得锁
                 final Node p = node.predecessor();
                 if (p == head) {
                     /**
                      * tryAcquireShared在子类中覆盖实现，比如CountDownLatch
                      * 中即：(getState() == 0) ? 1 : -1;
-                     * 即如果还有线程在占据共享锁，那么就返回-1
+                     * 即如果还有线程在占据共享锁，那么就返回-1(即获取失败)
                      */
                     int r = tryAcquireShared(arg);
                     if (r >= 0) {
@@ -1061,6 +1062,9 @@ public abstract class AbstractQueuedSynchronizer
                         return;
                     }
                 }
+                /**
+                 * 如果没有获取到锁，那么就阻塞
+                 */
                 if (shouldParkAfterFailedAcquire(p, node) &&
                         parkAndCheckInterrupt())
                     throw new InterruptedException();
@@ -1369,8 +1373,8 @@ public abstract class AbstractQueuedSynchronizer
         if (Thread.interrupted())
             throw new InterruptedException();
         /**
-         * tryAcquireShared在子类中覆盖实现，比如CountDownLatch
-         * 中即：(getState() == 0) ? 1 : -1;
+         * tryAcquireShared在子类中覆盖实现，
+         * 比如CountDownLatch中的实现即：(getState() == 0) ? 1 : -1;
          * 即如果还有线程在占据共享锁，那么就返回-1
          */
         if (tryAcquireShared(arg) < 0)
