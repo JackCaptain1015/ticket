@@ -723,8 +723,7 @@ public abstract class AbstractQueuedSynchronizer
                     continue;                // loop on failed CAS
             }
             /**
-             * 在unparkSuccessor()方法中没有改变h或者head的操作，所以这里
-             * 应该在别的地方做
+             * 正常逻辑走下来的话，这里执行完unparkSuccessor(h)后就会break出去
              */
             if (h == head)                   // loop if head changed
                 break;
